@@ -1,22 +1,25 @@
-# 12-Week Shopify Plus Enablement Plan
+# 12-Week AI + Shopify Plus Enablement Plan
 
 ## Program Overview
 
-**Target:** Verz Design technical team (Singapore)  
-**Duration:** 12 weeks  
-**Format:** Self-paced learning + weekly sync sessions  
-**Goal:** Build comprehensive Shopify Plus expertise across all core capabilities
+**Target:** Verz Design technical team (Singapore)
+**Duration:** 12 weeks
+**Format:** Self-paced learning + weekly sync sessions + hands-on AI workshops
+**Goal:** Build comprehensive Shopify Plus + AI expertise for Southeast Asian enterprise commerce
 
 ### Success Metrics
 
 **By end of Week 12:**
-- [ ] Team can architect & build Plus stores independently
+- [ ] Team can architect & build AI-enabled Plus stores independently
 - [ ] 2+ developers certified in Shopify app development
 - [ ] 1 production Shopify Function deployed
 - [ ] 1 custom checkout extension live
 - [ ] Successfully migrated 1 client to extensible checkout
 - [ ] Built 1 custom app for internal use or client
 - [ ] Documented 5+ reusable Plus patterns/templates
+- [ ] All AI features (Magic, Sidekick, Audiences, semantic search) configured on at least 1 client store
+- [ ] AI-powered content generation workflow established (product descriptions, SEO, multilingual)
+- [ ] 3+ Shopify Flow AI automations deployed for a SEA client
 
 ### Time Commitment
 - **Self-study:** 6-8 hours/week
@@ -24,621 +27,575 @@
 - **Weekly sync:** 1 hour/week
 - **Total:** ~12-15 hours/week per participant
 
-## Program Structure
+---
 
-### Learning Tracks
+## Pre-Implementation: Discovery & AI Readiness Audit (Week 0)
 
-#### Track A: Foundation (Weeks 1-4)
-**For:** Developers new to Shopify or Plus  
-**Focus:** Plus features, architecture, Liquid basics
+Before the 12-week program begins, conduct a baseline audit for the pilot client store.
 
-#### Track B: Advanced (Weeks 5-8)
-**For:** Experienced Shopify developers  
-**Focus:** Checkout extensibility, Functions, app development
+### Activities
 
-#### Track C: Specialization (Weeks 9-12)
-**For:** All participants  
-**Focus:** Choose 1-2 deep-dive areas (B2B, headless, apps)
+| **Task** | **Owner** | **Output** |
+|----------|----------|-----------|
+| Audit current store (theme, apps, integrations) | Verz Tech Lead | Store audit document |
+| Review product catalog quality (images, descriptions, tags) | Verz Content | Catalog quality scorecard |
+| Analyze current analytics (CVR, AOV, traffic sources) | Verz Analytics | Baseline metrics report |
+| Identify top 3 business pain points | Client + Verz PM | Priority alignment doc |
+| Document current tech stack (ERP, CRM, POS, marketing tools) | Client IT | Integration map |
+| Define success metrics and KPIs | Verz PM + Client | KPI agreement |
+
+### Baseline Metrics to Capture
+
+```
+Record current state:
+- Conversion rate (overall + by channel)
+- Average order value
+- Search conversion rate
+- Zero-result search percentage
+- Content production time (products/week)
+- Customer acquisition cost (by channel)
+- Customer retention rate (30/60/90 day)
+- Revenue per session
+- Support ticket volume
+- Time to launch new products
+```
+
+### Go/No-Go Checklist
+
+```
+☐ Shopify Plus plan active
+☐ At least 200 products in catalog
+☐ Minimum 5,000 monthly sessions (for meaningful AI training)
+☐ Product images available (minimum 1 per product)
+☐ Client team trained on Shopify Admin basics
+☐ Integration requirements documented
+☐ Budget and timeline approved
+☐ Success metrics agreed
+```
 
 ---
 
-## Week 1: Shopify Plus Foundations
+## Phase 1: Foundation + AI Quick Wins (Weeks 1-4)
 
-### Learning Objectives
+### Week 1: Shopify Plus Foundations + AI Overview
+
+#### Learning Objectives
 - Understand Plus vs standard Shopify
-- Know when to recommend Plus to clients
-- Identify key Plus features and use cases
-- Set up development environment
+- Know when to recommend Plus to SEA clients
+- Understand Shopify's AI strategy and feature landscape
+- Set up development environment with AI features enabled
 
-### Study Materials
+#### Study Materials
 - **Read:** [01-shopify-plus-overview.md](01-shopify-plus-overview.md)
 - **Watch:** [Shopify Plus Product Tour](https://www.youtube.com/shopify) (30 min)
 - **Explore:** [Shopify Plus website](https://www.shopify.com/plus)
+- **Read:** Shopify Editions announcements (AI features)
 
-### Hands-On Exercise
+#### Hands-On Exercise
 1. **Create Partner account** (if not already done)
 2. **Spin up development store** (Plus plan)
-3. **Explore admin:**
+3. **Explore admin AI features:**
+   - Shopify Magic — generate 10 product descriptions, test brand voice configuration
+   - Sidekick — run 10 analytics queries (top sellers, conversion trends, customer segments)
    - Flow workflows (3 pre-built templates)
    - LaunchPad (create test event)
    - B2B settings (enable company accounts)
-4. **Document findings:** What's different from standard Shopify?
+4. **Document findings:** What AI features are available? What requires Plus?
 
-### Deliverable
-**Plus Feature Comparison Matrix** (spreadsheet or doc):
-- Feature list (Flow, Functions, B2B, checkout, etc.)
-- Standard vs Plus availability
-- Use case examples for APAC clients
+#### Deliverable
+- **Plus + AI Feature Comparison Matrix** (spreadsheet or doc):
+  - Feature list (Magic, Sidekick, Audiences, Flow, Functions, B2B, checkout, etc.)
+  - Standard vs Plus availability
+  - AI capability per feature
+  - Use case examples for SEA clients
 
-### Resources
+#### Resources
 - [Shopify Partner Docs](https://shopify.dev/docs)
-- [Plus Pricing](https://www.shopify.com/plus/pricing)
+- [Shopify AI & Magic documentation](https://help.shopify.com/en/manual/shopify-magic)
 - [Development Store Setup](https://shopify.dev/docs/apps/tools/development-stores)
 
 ---
 
-## Week 2: Checkout Extensibility
+### Week 2: Checkout Extensibility + AI Content Generation
 
-### Learning Objectives
+#### Learning Objectives
 - Understand extensible checkout architecture
 - Build basic checkout UI extension
-- Apply checkout branding via API
-- Plan checkout.liquid migration strategy
+- Master Shopify Magic for content generation
+- Set up AI-powered SEO metadata workflow
 
-### Study Materials
+#### Study Materials
 - **Read:** [02-checkout-extensibility.md](02-checkout-extensibility.md)
-- **Watch:** [Checkout Extensibility Overview](https://www.youtube.com/shopify) (45 min)
 - **Tutorial:** [Build your first checkout extension](https://shopify.dev/docs/apps/checkout/getting-started)
+- **Explore:** Shopify Magic brand voice settings
 
-### Hands-On Exercise
-**Build 3 checkout extensions:**
+#### Hands-On Exercise
 
-#### 1. Delivery Instructions Field
-- Extension target: `purchase.checkout.delivery-address.render-after`
-- Component: TextField (multiline)
-- Save to cart attribute `delivery_instructions`
+**Part A: Checkout Extensions (same as before)**
+Build 3 checkout extensions:
+1. **Delivery Instructions Field** — `purchase.checkout.delivery-address.render-after`
+2. **Gift Message Option** — conditional on order total >$50
+3. **Upsell Banner** — AI-powered product recommendation in checkout
 
-#### 2. Gift Message Option
-- Extension target: `purchase.checkout.block.render`
-- Conditional: Show only if order total >$50
-- Components: Checkbox + TextField
+**Part B: AI Content Workshop (NEW)**
+1. **Configure brand voice:**
+   - Upload 20-30 sample product descriptions from a SEA client
+   - Set tone preferences (professional, friendly, luxury — match brand)
+   - Define prohibited words/claims
+2. **Generate AI content for 50 products:**
+   - Product descriptions (English)
+   - SEO meta titles and descriptions
+   - Alt text for product images
+3. **Multilingual content generation:**
+   - Generate descriptions in Malay, Thai, or Bahasa Indonesia
+   - Have native speakers QA the first 20 translations
+4. **Image optimization:**
+   - Batch background removal using Shopify Magic
+   - Image enhancement for consistency
 
-#### 3. Upsell Banner
-- Extension target: `purchase.checkout.block.render`
-- Show product recommendation based on cart contents
-- Add to cart functionality
-
-### Deliverable
+#### Deliverable
 - **GitHub repo:** 3 working checkout extensions
-- **Video demo:** 2-min walkthrough of extensions in action
-- **Documentation:** Setup instructions for each extension
-
-### Resources
-- [Checkout UI Extensions API](https://shopify.dev/docs/api/checkout-ui-extensions)
-- [Component Reference](https://shopify.dev/docs/api/checkout-ui-extensions/components)
-- [Extension Examples](https://github.com/Shopify/checkout-ui-extensions-examples)
+- **Content workflow doc:** Step-by-step AI content generation SOP for SEA markets
+- **Before/after:** Content production time comparison (manual vs AI-assisted)
 
 ---
 
-## Week 3: Shopify Functions
+### Week 3: Shopify Functions + AI Search & Discovery
 
-### Learning Objectives
+#### Learning Objectives
 - Understand Functions architecture (Wasm)
 - Build discount, payment, and delivery Functions
-- Migrate from Script Editor
-- Deploy Functions to production
+- Activate and configure AI-powered semantic search
+- Set up AI product recommendations
 
-### Study Materials
+#### Study Materials
 - **Read:** [03-shopify-functions.md](03-shopify-functions.md)
-- **Watch:** [Shopify Functions Deep Dive](https://www.youtube.com/shopify) (60 min)
 - **Tutorial:** [Your first Function](https://shopify.dev/docs/api/functions/getting-started)
+- **Explore:** [Search & Discovery app](https://apps.shopify.com/search-and-discovery)
 
-### Hands-On Exercise
-**Build 3 Functions:**
+#### Hands-On Exercise
 
-#### 1. Tiered Discount Function
-- 10% off orders $100-$200
-- 15% off orders $200-$500
-- 20% off orders >$500
-- VIP customers: +5% extra
+**Part A: Shopify Functions**
+Build 3 Functions:
+1. **Tiered Discount Function** — 10%/$100+, 15%/$200+, 20%/$500+, VIP +5%
+2. **Payment Method Restriction** — B2B: invoice only; International: hide COD; High-risk: manual review
+3. **Dynamic Shipping Rates (SEA):**
+   - Singapore: Free shipping >S$50
+   - Malaysia: Free shipping >RM100
+   - Indonesia: Free shipping >IDR 500,000
+   - Thailand: Free shipping >฿1,000
+   - Philippines: Free shipping >₱2,000
+   - Express option: +$10 equivalent (all regions)
 
-#### 2. Payment Method Restriction
-- B2B customers: Invoice only (hide credit cards)
-- International orders: Hide COD
-- High-risk orders: Require manual review (hide all payments)
+**Part B: AI Search & Discovery (NEW)**
+1. **Enable AI-powered semantic search:**
+   - Configure synonym management (add SEA-specific synonyms)
+   - Set up multilingual search (English, Malay, Thai, Bahasa)
+   - Configure autocomplete and search filters
+2. **Test with 50 common queries** across languages
+3. **Set up AI product recommendations:**
+   - Homepage: "Recommended for You" / "Trending Now"
+   - Product page: "You May Also Like" + "Frequently Bought Together"
+   - Cart page: "Complete Your Order"
+   - Thank you page: "Customers Also Bought"
+4. **Configure Smart Collections:**
+   - "Trending Now" (auto-populated by AI)
+   - "New Arrivals" (automated)
+   - "Best Sellers" (by category)
 
-#### 3. Dynamic Shipping Rates
-- Singapore: Free shipping >$50
-- Malaysia: Free shipping >$100
-- Other APAC: Flat $15
-- Express option: +$10 (all regions)
-
-### Deliverable
-- **GitHub repo:** 3 production-ready Functions
-- **Test cases:** Document 5+ scenarios per Function
-- **Migration doc:** Script Editor → Functions conversion guide
-
-### Resources
-- [Functions API Reference](https://shopify.dev/docs/api/functions)
-- [Function Examples](https://github.com/Shopify/function-examples)
-- [Testing Guide](https://shopify.dev/docs/apps/functions/testing)
+#### Deliverable
+- **GitHub repo:** 3 production-ready Functions with SEA shipping logic
+- **Search configuration doc:** Semantic search setup + synonym list for SEA markets
+- **Recommendation widget screenshots:** All placements configured and tested
 
 ---
 
-## Week 4: Shopify Flow Automation
+### Week 4: Shopify Flow + AI Automation
 
-### Learning Objectives
+#### Learning Objectives
 - Build complex Flow workflows
-- Integrate third-party apps via connectors
-- Use HTTP requests for custom integrations
-- Optimize workflow performance
+- Integrate Shopify AI features into automation
+- Use Sidekick for operational efficiency
+- Configure Shopify Audiences for SEA ad campaigns
 
-### Study Materials
+#### Study Materials
 - **Read:** [07-flow-automation.md](07-flow-automation.md)
 - **Explore:** [Flow Template Library](https://help.shopify.com/en/manual/shopify-flow/templates)
-- **Watch:** [Flow Best Practices](https://www.youtube.com/shopify) (30 min)
 
-### Hands-On Exercise
-**Build 5 production workflows:**
+#### Hands-On Exercise
 
-#### 1. VIP Customer Rewards
-- Trigger: Customer lifetime spend reaches $1,000
-- Actions:
-  - Tag "VIP"
-  - Send email with 15% discount code
-  - Notify sales team (Slack/email)
+**Build 7 production workflows (enhanced with AI):**
 
-#### 2. Multi-Region Order Routing
-- Trigger: Order created
-- Conditions: Route by shipping country
-  - SG → Tag "Warehouse-SG"
-  - MY/ID/TH → Tag "Warehouse-SEA"
-  - Others → Tag "Warehouse-International"
+1. **VIP Customer Rewards**
+   - Trigger: Customer lifetime spend reaches S$1,000
+   - Actions: Tag "VIP", send email with 15% discount, notify sales team
 
-#### 3. Low Inventory Alert System
-- Trigger: Inventory quantity changed
-- Condition: Available <10 units
-- Actions:
-  - Email procurement team
-  - Slack #inventory channel
-  - Tag product "low-stock"
+2. **Multi-Region SEA Order Routing**
+   - Trigger: Order created
+   - SG → Tag "Warehouse-SG"
+   - MY/ID/TH → Tag "Warehouse-SEA"
+   - PH/VN → Tag "Warehouse-PH"
+   - Others → Tag "Warehouse-International"
 
-#### 4. Fraud Prevention Workflow
-- Trigger: Order created
-- Condition: Fraud risk score >0.7 OR order total >$2,000
-- Actions:
-  - Tag "manual-review"
-  - Hold fulfillment (via webhook to WMS)
-  - Notify fraud team
+3. **Low Inventory Alert System**
+   - Trigger: Inventory <10 units
+   - Actions: Email procurement, Slack alert, tag "low-stock", remove from ads
 
-#### 5. Product Review Request
-- Trigger: Order fulfilled
-- Wait: 10 days
-- Action: Trigger Klaviyo email (review request)
+4. **Fraud Prevention Workflow**
+   - Trigger: Fraud risk >0.7 OR order >S$2,000
+   - Actions: Tag "manual-review", hold fulfillment, notify team
 
-### Deliverable
-- **Flow documentation:** Detailed setup guide for each workflow
-- **Workflow export:** JSON files for import
-- **ROI analysis:** Estimated time saved per workflow
+5. **AI-Powered Win-Back Campaign (NEW)**
+   - Trigger: No purchase in 90 days AND customer has 2+ orders
+   - Actions: Add to win-back segment, trigger personalized email, generate discount code
 
-### Resources
-- [Flow Documentation](https://help.shopify.com/en/manual/shopify-flow)
-- [Connectors Reference](https://shopify.dev/docs/apps/flow/connectors)
-- [HTTP Request Examples](https://help.shopify.com/en/manual/shopify-flow/actions/http-request)
+6. **Customer Segmentation Automation (NEW)**
+   - Trigger: Order created
+   - Conditions: Segment by purchase behavior
+   - Actions: Tag price-tier (budget/mid/premium), category affinity, region
+
+7. **Product Review Follow-Up (NEW)**
+   - Trigger: Order fulfilled
+   - Wait: 7 days
+   - Action: Send review request with product images + 10% next-purchase incentive
+
+**Sidekick Training Session:**
+- Run 20 Sidekick queries relevant to SEA operations
+- Document top query templates for the Verz team
+
+**Shopify Audiences Setup (NEW):**
+1. Enable Shopify Audiences
+2. Connect Meta Ads and Google Ads
+3. Generate first audience lists (prospecting, retargeting, category intent)
+4. Launch test campaigns: Audiences vs standard targeting
+5. Track CPA and ROAS comparison
+
+#### Deliverable
+- **Flow documentation:** Setup guide for all 7 workflows
+- **Sidekick query library:** 20+ queries tailored for SEA merchants
+- **Audiences report:** Initial performance comparison (week 1 data)
 
 ---
 
-## Week 5: B2B Commerce
+## Phase 2: Advanced + AI Deep Dives (Weeks 5-8)
 
-### Learning Objectives
+### Week 5: B2B Commerce + AI Personalization
+
+#### Learning Objectives
 - Set up B2B storefront and catalogs
-- Configure company accounts and payment terms
-- Build hybrid D2C + B2B experience
-- Customize B2B checkout flow
+- Configure AI-powered personalization engine
+- Build hybrid D2C + B2B experience for SEA wholesale
 
-### Study Materials
+#### Study Materials
 - **Read:** [05-b2b-on-shopify.md](05-b2b-on-shopify.md)
-- **Watch:** [B2B on Shopify Masterclass](https://www.youtube.com/shopify) (90 min)
-- **Case study:** [B2B implementation examples](https://www.shopify.com/plus/customers)
+- **Case study:** B2B implementation examples for APAC
 
-### Hands-On Exercise
-**Build complete B2B store:**
+#### Hands-On Exercise
 
-#### Setup Tasks
-1. **Enable B2B:**
-   - Settings → Markets → B2B
-   - Create company "Acme Corp" (test buyer)
-   - Set payment terms: Net 30
+**Part A: B2B Setup**
+1. Enable B2B, create test company, set payment terms (Net 30)
+2. Create 2 catalogs: "Wholesale" (25% off) + "VIP Wholesale" (35% off)
+3. Volume pricing: 10+ units: -10%, 50+ units: -15%
+4. Checkout customization: Hide retail payments for B2B, add PO number field
+5. Build B2B account dashboard in theme
 
-2. **Catalog Configuration:**
-   - Create 2 catalogs:
-     - "Wholesale Catalog" (25% discount)
-     - "VIP Wholesale" (35% discount)
-   - Assign 20 products to each
-   - Set volume pricing (10+ units: -10%, 50+ units: -15%)
+**Part B: AI Personalization Engine (NEW)**
+1. **Configure homepage personalization:**
+   - Returning customer → personalized recommendations
+   - New visitor → geo-based trending products (detect SG/MY/ID/TH/PH)
+   - Referral source → match intent (ad click → show ad product category)
+2. **Enable search personalization:** Results ranked by customer profile
+3. **Configure email personalization:**
+   - Browse abandonment with viewed products
+   - Cart abandonment with cart items + AI recommendations
+   - Post-purchase with complementary products
+4. **Set up customer segments:**
+   - Price tier segments (budget/mid/premium)
+   - Category affinity segments
+   - Regional segments (SG/MY/ID/TH/PH)
+   - Lifecycle segments (new/active/at-risk/churned)
 
-3. **Checkout Customization:**
-   - Build Function: Hide retail payment methods for B2B
-   - Build UI Extension: Add PO number field
-   - Flow workflow: Route B2B orders to accounting system
-
-4. **Company Portal:**
-   - Theme customization: B2B account dashboard
-   - Display: Order history, payment terms, credit limit
-
-### Deliverable
-- **Working B2B store** (dev environment)
-- **Demo video:** 5-min walkthrough of B2B customer journey
-- **Implementation guide:** Steps to set up B2B for client
-
-### Resources
-- [B2B Documentation](https://shopify.dev/docs/apps/b2b)
-- [Company API](https://shopify.dev/docs/api/admin-graphql/latest/objects/Company)
-- [B2B Liquid Objects](https://shopify.dev/docs/themes/liquid/reference/objects/company)
+#### Deliverable
+- **Working B2B store** with AI personalization
+- **Personalization configuration doc:** Rules, segments, and expected impact
+- **Demo video:** 5-min walkthrough of personalized B2B + D2C journey
 
 ---
 
-## Week 6: International Commerce & Markets
+### Week 6: International Commerce & Markets (SEA Focus)
 
-### Learning Objectives
-- Configure multi-market store (APAC focus)
-- Set up multi-currency and localization
-- Understand Markets Pro (DDP)
-- Integrate local payment methods
+#### Learning Objectives
+- Configure multi-market store for Southeast Asia
+- Set up multi-currency and localization with AI translation
+- Integrate local SEA payment methods
+- Use AI for multilingual content at scale
 
-### Study Materials
+#### Study Materials
 - **Read:** [06-international-commerce.md](06-international-commerce.md)
-- **Watch:** [Shopify Markets Tutorial](https://www.youtube.com/shopify) (60 min)
 - **Explore:** [Markets Best Practices](https://help.shopify.com/en/manual/markets)
 
-### Hands-On Exercise
-**Configure 5-market APAC store:**
+#### Hands-On Exercise
 
-#### Markets to Configure
-1. **Singapore** (primary)
-   - Domain: example.com
-   - Currency: SGD
-   - Language: English
-   - Payment: PayNow, Stripe, PayPal
+**Configure 5-market SEA store:**
 
-2. **Malaysia**
-   - Domain: example.com/my
-   - Currency: MYR
-   - Language: English, Malay
-   - Payment: GrabPay, Touch 'n Go
+1. **Singapore** (primary) — SGD, English, PayNow/Stripe/GrabPay
+2. **Malaysia** — MYR, English/Malay, GrabPay/Touch 'n Go/Boost
+3. **Indonesia** — IDR, Indonesian, GoPay/OVO/DANA/ShopeePay/COD
+4. **Thailand** — THB, Thai/English, PromptPay/Rabbit LINE Pay/TrueMoney
+5. **Philippines** — PHP, English, GCash/PayMaya/COD
 
-3. **Indonesia**
-   - Domain: example.com/id
-   - Currency: IDR
-   - Language: Indonesian
-   - Payment: GoPay, OVO, COD
+**AI-Enhanced Localization (NEW):**
+- Use Shopify Magic to generate product descriptions per market language
+- Native speaker QA on first 50 translations per language
+- Generate collection descriptions for all markets
+- Set up AI-powered search with multilingual synonyms per market
 
-4. **Thailand**
-   - Domain: example.com/th
-   - Currency: THB
-   - Language: Thai, English
-   - Payment: PromptPay, Rabbit LINE Pay
-
-5. **Philippines**
-   - Domain: example.com/ph
-   - Currency: PHP
-   - Language: English
-   - Payment: GCash, PayMaya, COD
-
-#### Configuration Tasks
-- **Pricing:** Set region-specific pricing (+/-10% from SGD base)
-- **Shipping:** Configure rates per market
-- **Tax:** Set up GST/VAT per country
-- **Localization:** Translate 10 key pages per language
-- **Flow:** Create workflow for multi-market order routing
-
-### Deliverable
-- **Multi-market store** (fully configured)
-- **Market comparison doc:** Pricing, shipping, payment per region
-- **Localization checklist:** Translation requirements for clients
-
-### Resources
-- [Shopify Markets Guide](https://help.shopify.com/en/manual/markets)
-- [Multi-Currency Setup](https://help.shopify.com/en/manual/payments/shopify-payments/multi-currency)
-- [Markets API](https://shopify.dev/docs/api/admin-graphql/latest/objects/Market)
+#### Deliverable
+- **Multi-market store** (fully configured, 5 SEA markets)
+- **AI translation workflow:** Process for scaling multilingual content
+- **Market comparison doc:** Pricing, shipping, payment, language per region
 
 ---
 
-## Week 7: Headless Commerce & Hydrogen
+### Week 7: Headless Commerce & Hydrogen
 
-### Learning Objectives
+#### Learning Objectives
 - Understand headless architecture
-- Build Hydrogen storefront (Remix-based)
-- Use Storefront API effectively
+- Build Hydrogen storefront with AI recommendation widgets
+- Use Storefront API for AI-powered product discovery
 - Deploy to Oxygen hosting
 
-### Study Materials
+#### Study Materials
 - **Read:** [04-headless-hydrogen.md](04-headless-hydrogen.md)
-- **Watch:** [Hydrogen Framework Overview](https://www.youtube.com/shopify) (75 min)
 - **Tutorial:** [Build a Hydrogen storefront](https://shopify.dev/docs/custom-storefronts/hydrogen)
 
-### Hands-On Exercise
-**Build Hydrogen storefront:**
+#### Hands-On Exercise
 
-#### Phase 1: Setup (Day 1-2)
-```bash
-npm create @shopify/hydrogen@latest
-cd my-hydrogen-store
-npm run dev
-```
+**Build Hydrogen storefront with AI features:**
 
-- Configure Storefront API token
-- Connect to dev store
-- Explore demo template
+1. **Setup** — scaffold Hydrogen app, connect to dev store
+2. **Product Listing Page** — grid, filtering, sorting, pagination
+3. **Product Detail Page** — gallery, variants, add-to-cart, **AI recommendations widget**
+4. **Cart Experience** — slide-out drawer, quantity adjust, **AI-powered upsells**
+5. **Multi-Market Support** — country selector, currency switching, localized content
+6. **AI Integration (NEW):**
+   - Integrate Storefront API `productRecommendations` query
+   - Implement `predictiveSearch` for semantic search
+   - Add personalized homepage section based on customer data
+7. **Deploy to Oxygen** — custom domain, analytics, Lighthouse >90
 
-#### Phase 2: Customization (Day 3-5)
-Build these features:
-1. **Product Listing Page:**
-   - Grid layout (responsive)
-   - Filtering (price, type, vendor)
-   - Sorting (price, newest, best-selling)
-   - Pagination
-
-2. **Product Detail Page:**
-   - Image gallery (4+ images)
-   - Variant selector (size, color)
-   - Add to cart
-   - Related products
-
-3. **Cart Experience:**
-   - Slide-out cart drawer
-   - Quantity adjustment
-   - Cart upsells
-   - Checkout redirect
-
-4. **Multi-Market Support:**
-   - Country selector
-   - Currency switching
-   - Localized content
-
-#### Phase 3: Deployment (Day 6-7)
-- Deploy to Oxygen
-- Configure custom domain
-- Set up analytics
-- Performance optimization (Lighthouse score >90)
-
-### Deliverable
-- **Live Hydrogen store** (deployed to Oxygen)
-- **GitHub repo:** Source code with documentation
-- **Performance report:** Lighthouse scores + optimizations applied
-
-### Resources
-- [Hydrogen Docs](https://shopify.dev/docs/custom-storefronts/hydrogen)
-- [Storefront API](https://shopify.dev/docs/api/storefront)
-- [Oxygen Hosting](https://shopify.dev/docs/custom-storefronts/oxygen)
+#### Deliverable
+- **Live Hydrogen store** with AI features (deployed to Oxygen)
+- **GitHub repo:** Source code with AI integration documented
+- **Performance report:** Lighthouse scores + AI feature load impact
 
 ---
 
-## Week 8: App Development Fundamentals
+### Week 8: App Development + AI Integration
 
-### Learning Objectives
-- Set up Shopify CLI development environment
-- Build embedded admin app (Remix)
-- Use Admin API (GraphQL)
-- Deploy app to production
+#### Learning Objectives
+- Build embedded admin app with AI capabilities
+- Use Admin API (GraphQL) for AI-enhanced operations
+- Integrate Shopify Magic and Sidekick patterns into custom apps
 
-### Study Materials
+#### Study Materials
 - **Read:** [08-app-development.md](08-app-development.md)
-- **Watch:** [Build a Shopify App (Full Course)](https://www.youtube.com/shopify) (2 hours)
 - **Tutorial:** [Your first app](https://shopify.dev/docs/apps/getting-started)
 
-### Hands-On Exercise
-**Build complete admin app:**
+#### Hands-On Exercise
 
-#### App: "Bulk Product Tagger"
+**Build: "Smart Product Manager" app (AI-enhanced)**
 
 **Features:**
-1. **Dashboard Page:**
-   - Display product count
-   - Show top 10 tags
-   - Quick actions (tag all, untag all)
-
-2. **Bulk Tag Page:**
-   - Product table (title, vendor, existing tags)
-   - Checkbox selection
-   - Bulk add/remove tags
-   - Search & filter
-
-3. **Tag Rules Page:**
-   - Create auto-tag rules
-   - Examples:
-     - Price >$100 → tag "premium"
-     - Vendor = "Nike" → tag "brand-nike"
-     - Type = "Shoes" → tag "footwear"
-   - Save rules to database
+1. **Dashboard** — product count, top tags, AI-generated insights
+2. **Bulk AI Content Generator (NEW):**
+   - Select products → bulk generate descriptions via Shopify Magic
+   - Generate SEO metadata in batch
+   - Generate multilingual descriptions (English + 1 SEA language)
+   - Review/approve workflow before publishing
+3. **Smart Tag Rules:**
+   - AI-suggested auto-tag rules based on product attributes
+   - Price >$100 → "premium"; Vendor = "Nike" → "brand-nike"
    - Apply rules on-demand or via webhook
-
-4. **Settings Page:**
-   - Configure tag prefixes
-   - Set default tags for new products
-   - Enable/disable auto-tagging
+4. **Analytics Dashboard (NEW):**
+   - AI recommendation performance (CTR, conversion by widget)
+   - Search analytics (top queries, zero-result rate)
+   - Content generation metrics (AI vs manual)
 
 #### Technical Requirements
-- **Framework:** Remix
-- **UI:** Polaris components
-- **Database:** SQLite (dev), PostgreSQL (prod)
-- **API:** GraphQL Admin API
-- **Webhooks:** `products/create`, `products/update`
-- **Deployment:** Vercel or Render
+- Framework: Remix | UI: Polaris | DB: SQLite (dev), PostgreSQL (prod)
+- API: GraphQL Admin API | Webhooks: `products/create`, `products/update`
 
-### Deliverable
+#### Deliverable
 - **Working app** (deployed and installable)
 - **GitHub repo:** Source code + README
-- **Demo video:** 5-min feature walkthrough
-- **Documentation:** Setup guide + API reference
-
-### Resources
-- [Shopify CLI](https://shopify.dev/docs/apps/tools/cli)
-- [Admin API Reference](https://shopify.dev/docs/api/admin-graphql)
-- [Polaris Components](https://polaris.shopify.com/components)
-- [App Examples](https://github.com/Shopify/shopify-app-examples)
+- **Demo video:** 5-min feature walkthrough with AI capabilities
 
 ---
 
-## Week 9-10: Specialization Track (Choose One)
+## Phase 3: Specialization + AI Mastery (Weeks 9-12)
 
-### Option A: Advanced B2B Solutions
+### Week 9-10: AI Specialization Track (Choose One)
 
-**Project:** Build end-to-end B2B platform
+#### Option A: AI-Powered B2B Platform for SEA
+
+**Project:** End-to-end B2B platform with AI features
 
 **Features:**
-- Multi-tier pricing (Gold/Silver/Bronze customers)
-- Quote request system (admin app)
-- Custom order forms (theme extension)
-- Account rep assignment (Flow + app)
-- Purchase order approval workflow
+- Multi-tier AI-suggested pricing (Gold/Silver/Bronze)
+- Quote request system with AI pricing recommendations
+- AI-powered reorder suggestions based on purchase cycles
+- Automated B2B customer segmentation
+- Flow: auto-approval workflows based on credit scoring
 
 **Deliverables:**
-- Working B2B store with custom features
-- Admin app for quote management
+- Working B2B store with AI features
+- Admin app for AI-assisted quote management
 - Flow workflows for approval chains
-- Documentation + client pitch deck
+- Documentation + client pitch deck for SEA wholesale market
 
 ---
 
-### Option B: Headless & Mobile Commerce
+#### Option B: AI-First Headless Mobile Commerce
 
-**Project:** Build mobile app + headless admin
+**Project:** Mobile app + AI-powered headless admin
 
-**Stack:**
-- Mobile: React Native (iOS/Android)
-- Admin: Custom dashboard (Next.js)
-- APIs: Storefront + Admin GraphQL
+**Stack:** React Native (iOS/Android) + Next.js admin + Storefront API
 
 **Features:**
-- Native mobile shopping experience
-- Push notifications (order updates)
-- Biometric login
-- Custom admin analytics dashboard
+- Native mobile shopping with AI recommendations
+- AI-powered push notifications (personalized offers based on behavior)
+- Semantic search in mobile app
+- Custom admin dashboard with AI analytics (recommendation performance, search insights)
 
 **Deliverables:**
 - Deployed mobile app (TestFlight/Play Store)
-- Admin dashboard (deployed)
+- Admin dashboard with AI metrics
 - API integration guide
 
 ---
 
-### Option C: Marketplace Platform
+#### Option C: AI-Enhanced Marketplace Platform
 
 **Project:** Multi-vendor marketplace on Shopify Plus
 
 **Features:**
-- Vendor registration portal (custom app)
-- Vendor dashboard (product management)
-- Commission tracking (Flow + app)
-- Automated payouts (integration with payment provider)
-- Vendor analytics
+- Vendor registration portal
+- AI-powered product categorization and tagging for vendor uploads
+- AI recommendation engine across vendors
+- Commission tracking with Flow automation
+- Automated vendor analytics (AI-generated insights)
 
 **Deliverables:**
-- Marketplace app (multi-tenant)
+- Marketplace app with AI features
 - Vendor onboarding flow
-- Commission calculation engine
+- AI-powered product discovery across vendors
 - Admin reporting dashboard
 
 ---
 
-## Week 11: Optimization & Performance
+### Week 11: Optimization, Performance & AI Tuning
 
-### Learning Objectives
+#### Learning Objectives
 - Optimize theme performance (Core Web Vitals)
-- Reduce API call overhead
-- Implement caching strategies
-- Monitor and debug production issues
+- Tune AI features for maximum impact
+- Measure and report on AI ROI
+- Reduce API call overhead with caching
 
-### Study Materials
-- **Read:** [Performance Best Practices](https://shopify.dev/docs/themes/best-practices/performance)
-- **Watch:** [Shopify Performance Masterclass](https://www.youtube.com/shopify) (60 min)
-- **Tool:** [Shopify Theme Inspector](https://shopify.dev/docs/themes/tools/theme-inspector)
+#### Hands-On Exercise
 
-### Hands-On Exercise
-**Optimize existing project:**
+**Performance Audit:**
+1. Run Lighthouse on Week 7 Hydrogen store → target >90
+2. Optimize: image lazy loading, code splitting, CDN caching, defer non-critical JS
 
-#### Performance Audit
-1. **Run Lighthouse** on your Week 7 Hydrogen store
-   - Target: >90 Performance score
-   - Identify bottlenecks
+**AI Performance Review (NEW):**
+1. **Search analytics review:**
+   - Top zero-result queries → add products or synonyms
+   - Low-converting search terms → improve product data
+   - High-traffic queries → create dedicated landing pages
+2. **Recommendation performance:**
+   - CTR by widget placement (PDP, cart, homepage)
+   - AOV impact of recommendation widgets
+   - A/B test recommendation strategies
+3. **Content generation audit:**
+   - AI-generated vs manual description conversion rates
+   - SEO ranking changes post-AI content
+   - Multilingual content quality scores
+4. **Audiences performance:**
+   - CPA comparison: Audiences vs standard targeting
+   - ROAS by audience type
+   - Optimization recommendations
 
-2. **Optimize:**
-   - Image lazy loading
-   - Code splitting
-   - Reduce bundle size
-   - Implement CDN caching
-   - Defer non-critical JS
-
-3. **API Optimization:**
-   - Batch GraphQL queries
-   - Implement query caching
-   - Use pagination (avoid fetching all data)
-   - Optimize webhook processing
-
-### Deliverable
-- **Before/after performance report:**
-  - Lighthouse scores
-  - Load times (3G/4G/WiFi)
-  - API call counts
-  - Bundle sizes
-- **Optimization guide:** Checklist for future projects
-
-### Resources
-- [Web.dev Performance](https://web.dev/performance/)
-- [GraphQL Best Practices](https://graphql.org/learn/best-practices/)
-- [Shopify Performance Docs](https://shopify.dev/docs/themes/best-practices/performance)
+#### Deliverable
+- **AI Performance Report:**
+  - Search: conversion rate, zero-result %, top queries
+  - Recommendations: CTR, conversion, AOV lift
+  - Content: production time savings, quality metrics
+  - Audiences: CPA, ROAS, audience size
+- **Optimization playbook:** Checklist for ongoing AI tuning
 
 ---
 
-## Week 12: Capstone Project
+### Week 12: Capstone Project — AI-Powered Plus Store for SEA
 
-### Project: Build Production-Ready Plus Store
+#### Project Brief (Simulated)
 
-**Client Brief (Simulated):**
-
-**Company:** "LUXE Watches" (Singapore-based luxury watch retailer)
+**Company:** "LUXE Watches" (Singapore-based luxury watch retailer, SEA expansion)
 
 **Requirements:**
-- **Multi-market:** SG, HK, MY (3 markets)
+- **Multi-market:** SG, MY, TH (3 SEA markets)
 - **B2B + D2C:** Wholesale for authorized dealers
+- **AI Features (NEW):**
+  - Shopify Magic: AI-generated descriptions in English, Malay, Thai
+  - Semantic search with multilingual support
+  - AI recommendations on all key pages
+  - Shopify Audiences campaigns (Meta + Google)
+  - Sidekick trained for merchant operations
+  - Personalization: geo-based, behavior-based, lifecycle-based
 - **Checkout:** Custom engraving field + gift wrap option
-- **Functions:** Hide COD for orders >$5,000
-- **Flow:** VIP tagging (spend >$10k), low inventory alerts
+- **Functions:** Hide COD for orders >S$5,000
+- **Flow:** VIP tagging (spend >S$10k), low inventory alerts, win-back automation, customer segmentation
 - **App:** Custom warranty registration portal
 - **Performance:** <2s load time, Lighthouse >85
 
-**Deliverables:**
+#### Deliverables
+
 1. **Fully configured Plus store:**
    - Theme (Dawn customized or custom)
-   - Markets setup (3 regions)
+   - 3 SEA markets with local payments
    - B2B enabled
-   - Products (20+ sample products)
+   - All AI features activated and configured
+   - Products (20+ with AI-generated content in 3 languages)
 
 2. **Custom extensions:**
    - 2+ checkout UI extensions
-   - 2+ Shopify Functions
+   - 2+ Shopify Functions (SEA shipping + payment logic)
    - 1 theme app extension (warranty registration)
 
-3. **Automation:**
-   - 3+ Flow workflows
-   - Webhook integrations
+3. **AI configuration:**
+   - Semantic search with SEA synonyms
+   - Recommendation widgets on all key pages
+   - Shopify Audiences with 2+ active campaigns
+   - Personalization rules (3+ customer segments)
+   - 5+ Flow automations (including AI-enhanced)
 
 4. **Documentation:**
-   - **Store setup guide** (20+ pages)
-   - **Developer documentation** (API reference, architecture)
-   - **Client handover doc** (how to manage the store)
+   - **Store setup guide** (20+ pages, includes AI feature setup)
+   - **AI playbook** (configuration, tuning, measurement)
+   - **Client handover doc** (how to manage store + AI features)
 
 5. **Presentation:**
-   - **15-min video demo** (full customer journey + admin tour)
-   - **Pitch deck** (technical capabilities showcase)
+   - **15-min video demo** (full customer journey + AI features + admin tour)
+   - **Pitch deck** (AI + Shopify Plus capabilities for SEA market)
+   - **ROI projection** (expected impact of AI features based on benchmarks)
 
-### Evaluation Criteria
-- **Functionality:** All requirements met (40%)
-- **Code quality:** Clean, documented, best practices (20%)
-- **Performance:** Lighthouse scores, load times (15%)
-- **Documentation:** Comprehensive, clear, client-ready (15%)
-- **Presentation:** Professional, well-organized (10%)
+#### Evaluation Criteria
+- **Functionality:** All requirements met, AI features working (35%)
+- **AI Integration:** Proper configuration, measurable impact (20%)
+- **Code quality:** Clean, documented, best practices (15%)
+- **Performance:** Lighthouse scores, load times (10%)
+- **Documentation:** Comprehensive, client-ready, AI playbook (10%)
+- **Presentation:** Professional, compelling AI narrative (10%)
 
 ---
 
@@ -652,6 +609,11 @@ Build these features:
   - 20 min: Demo deliverables (team shows work)
   - 20 min: Q&A / troubleshooting
   - 10 min: Preview next week's content
+
+### AI Workshop Sessions (NEW — Biweekly)
+- **Duration:** 90 minutes (Weeks 2, 4, 6, 8, 10, 12)
+- **Format:** Hands-on, screen-share, build together
+- **Topics rotate:** Content generation → Search tuning → Personalization → Audiences → Flow automation → Capstone review
 
 ### Office Hours
 - **Ad-hoc support:** Slack channel or email
@@ -668,36 +630,88 @@ Upon completion, team members should pursue:
 - **Shopify Theme Development** (official certification)
 - **Shopify Plus Foundations** (partner certification)
 
+### AI & Commerce Certifications (NEW)
+- **Google AI Essentials** (Coursera) — 10 hours, AI fundamentals
+- **AI for Everyone** (Andrew Ng, Coursera) — 6 hours, non-technical AI strategy
+- **Google Analytics 4 Certification** — Free, essential for measuring AI impact
+- **Meta Blueprint Certification** — For Shopify Audiences campaign optimization
+
 ### Verz Design Internal Recognition
-- **Plus Developer Badge** (internal recognition program)
-- **Showcase projects** on company website/portfolio
-- **Knowledge sharing:** Present learnings to broader team
+- **Plus + AI Developer Badge** (internal recognition program)
+- **Showcase AI-powered projects** on company website/portfolio
+- **Knowledge sharing:** Present AI learnings to broader team
+- **SEA AI case studies:** Document client wins for business development
 
 ---
 
 ## Post-Enablement Support
 
 ### Ongoing Resources
-- **Monthly Plus updates webinar** (hosted by PSE)
-- **Quarterly deep-dive sessions** (new features, beta programs)
+- **Monthly Plus + AI updates webinar** (hosted by PSE)
+- **Quarterly deep-dive sessions** (new AI features, beta programs)
 - **Private Slack channel** (Verz Design + Shopify PSE)
-- **Access to beta programs** (early access to new features)
+- **Access to beta programs** (early access to new AI features)
 
 ### Success Metrics (6 months post-enablement)
-- [ ] 5+ Plus stores launched by Verz Design
-- [ ] 3+ custom apps built for clients
+- [ ] 5+ AI-enabled Plus stores launched by Verz Design
+- [ ] 3+ custom apps built with AI integration
 - [ ] Zero checkout.liquid migrations (all extensible checkout)
-- [ ] 10+ reusable Plus components/templates library
-- [ ] 2+ case studies published
+- [ ] 10+ reusable Plus + AI components/templates library
+- [ ] 2+ AI case studies published (SEA market focus)
+- [ ] Measurable client ROI: search CVR +30%, AOV +15%, content production 5x faster
+- [ ] Shopify Audiences deployed for 3+ clients with ROAS improvement documented
+
+### 90-Day AI Optimization Roadmap (Post-Enablement)
+
+**Month 1 (Weeks 13-16): Monitor & Adjust**
+- Weekly: Review search analytics, recommendation performance, Flow errors
+- Adjust personalization rules based on data
+- Optimize Audiences campaigns (CPA, ROAS)
+- Verz involvement: 4-6 hours/week
+
+**Month 2 (Weeks 17-20): Optimize & Expand**
+- A/B test recommendation strategies
+- Expand multilingual content (add Vietnamese, Khmer)
+- Optimize Flow automations based on edge cases
+- Advanced customer segmentation refinement
+- Verz involvement: 2-4 hours/week
+
+**Month 3 (Weeks 21-24): Scale & Automate**
+- Scale high-ROI AI features across client portfolio
+- Automate remaining manual processes
+- Prepare seasonal campaign AI playbooks (11.11, 12.12, CNY, Hari Raya)
+- Strategic review: Next phase planning
+- Verz involvement: 2-3 hours/week
 
 ---
 
-## Additional Resources
+## Expected AI Impact Timeline
 
-- [Shopify Partner Academy](https://partner-training.shopify.com/)
-- [Shopify Dev Discord](https://discord.gg/shopifydevs)
-- [Plus Partner Slack](https://shopify-partners.slack.com)
-- [GitHub: Shopify Examples](https://github.com/Shopify)
+```
+Week 1-4: Foundation + Quick Wins
+├── Content production: 80% time reduction (immediate)
+├── SEO: Metadata complete (impact in 8-12 weeks)
+├── Search: Semantic search active, zero-result rate dropping
+└── Customer data: Segmentation begins
+
+Week 5-8: Advanced + AI Deep Dives
+├── Search conversion: +30-50% (semantic search)
+├── AOV: +10-15% (recommendation widgets)
+├── Email conversion: +50-80% (personalization)
+└── Ad efficiency: +30-50% ROAS (Audiences)
+
+Week 9-12: Specialization + AI Mastery
+├── Team efficiency: +40% (Sidekick + automation)
+├── Full AI stack deployed on capstone project
+├── Client-ready AI playbooks documented
+└── Overall CVR: +50-100% vs baseline
+
+Month 3+: Compounding Returns
+├── Organic traffic: +40-60% (SEO compound effect)
+├── Customer retention: +25-35% (personalization)
+├── CLV: +30-50% (better segmentation + lifecycle marketing)
+└── AI features improve as more data flows through
+```
 
 ---
 
