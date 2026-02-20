@@ -1,280 +1,224 @@
-# Shopify Flow Automation
+# AI-Enhanced Shopify Flow Automation for Southeast Asia
 
-## What is Shopify Flow?
+## Overview
 
-**Shopify Flow** is a visual workflow automation tool included with Shopify Plus. It allows you to automate repetitive tasks based on triggers, conditions, and actions—no code required.
+Shopify Flow is a visual workflow automation tool included with Shopify Plus. With AI integration, Flow evolves from simple "if-this-then-that" automation into an intelligent decision engine—predicting customer behavior, detecting fraud, optimizing inventory, and adapting to the unique complexities of Southeast Asian commerce.
 
-**Think of it as:** "If this happens, then do that."
-
-### Key Benefits
-- **Saves time:** Automate manual tasks (tagging, notifications, hiding products)
-- **Reduces errors:** Consistent rule execution (no human mistakes)
-- **Scales operations:** Handle more orders without more staff
-- **Shopify Plus exclusive:** Included free with Plus plan
+This guide covers both foundational Flow concepts and advanced AI-enhanced capabilities tailored for SEA merchants across Singapore, Malaysia, Indonesia, Thailand, Vietnam, and the Philippines.
 
 ## Flow Fundamentals
 
 ### Three Building Blocks
 
-#### 1. Trigger
-**What starts the workflow?**
+#### 1. Trigger — What starts the workflow?
+- Order created / paid / fulfilled
+- Customer created / updated
+- Product created / inventory changed
+- Cart created / refund created
 
-Common triggers:
-- **Order created**
-- **Order paid**
-- **Order fulfilled**
-- **Customer created**
-- **Product created**
-- **Inventory quantity changed**
-- **Cart created**
-- **Refund created**
-
-#### 2. Condition
-**Should the action run?**
-
-Filter based on criteria:
-- Order total > $500
-- Customer is tagged "VIP"
-- Product type = "Electronics"
+#### 2. Condition — Should the action run?
+- Order total > SGD 500
+- Customer tagged "VIP"
+- Shipping country = "MY"
 - Inventory level < 10
-- Shipping country = "Singapore"
 
-#### 3. Action
-**What should happen?**
+#### 3. Action — What should happen?
+- Tag customer / order / product
+- Send email or Slack notification
+- Hide / unpublish product
+- Create discount code
+- Call external API (webhook)
 
-Common actions:
-- **Tag** customer/order/product
-- **Send email** to staff or customer
-- **Send Slack notification**
-- **Hide/unpublish product**
-- **Add note to order**
-- **Create discount code**
-- **Call API** (webhooks to external systems)
+### Simple Example
 
-### Example Flow
-
-**Workflow:** Tag high-value orders
-- **Trigger:** Order created
-- **Condition:** Order total ≥ $500
-- **Action:** Tag order with "high-value"
-
-**Result:** All orders ≥$500 automatically tagged for priority fulfillment.
-
-## Built-in Workflow Templates
-
-Shopify provides **100+ pre-built templates** for common use cases:
-
-### Popular Templates
-
-#### 1. Customer Loyalty & Segmentation
-- **VIP tagging:** Tag customers who spend >$1,000
-- **Repeat customer reward:** Send 10% discount code after 3rd purchase
-- **Win-back:** Email customers who haven't ordered in 90 days
-- **High-value customer alert:** Notify sales team when VIP orders
-
-#### 2. Inventory Management
-- **Low stock alert:** Email when inventory <10 units
-- **Out of stock:** Unpublish product when inventory = 0
-- **Restock notification:** Publish product when inventory >0
-- **Variant disabling:** Disable specific variants when sold out
-
-#### 3. Fraud Prevention
-- **High-risk order:** Tag orders flagged as high fraud risk
-- **Cancel suspicious orders:** Auto-cancel if risk score >0.8
-- **Notify for manual review:** Slack alert for medium-risk orders
-- **Refund monitoring:** Alert on refunds >$500
-
-#### 4. Order Processing
-- **International order routing:** Tag international orders for specific warehouse
-- **Gift order handling:** Tag orders with gift message
-- **B2B order priority:** Tag B2B customer orders for priority processing
-- **Same-day fulfillment:** Tag orders placed before 2 PM for same-day ship
-
-#### 5. Marketing & Engagement
-- **Welcome series:** Email new customers with onboarding sequence
-- **Product review request:** Email 7 days after fulfillment
-- **Birthday discount:** Send discount code on customer birthday
-- **Abandoned checkout:** Trigger external email sequence
-
-## Building Custom Flows
-
-### Step-by-Step: Tag VIP Customers
-
-**Goal:** Automatically tag customers who have spent ≥$1,000 total.
-
-**Setup:**
-1. **Flow → Create workflow**
-2. **Trigger:** Customer updated
-3. **Condition:** Total spent ≥ 1000
-4. **Action:** Add customer tag "VIP"
-5. **Save & turn on**
-
-**Visual:**
-```
-┌─────────────────┐
-│ Customer updated│ (Trigger)
-└────────┬────────┘
-         │
-    ┌────▼────┐
-    │ Total   │
-    │ spent   │ (Condition)
-    │ ≥ $1000 │
-    └────┬────┘
-         │ Yes
-    ┌────▼─────────┐
-    │ Tag customer │ (Action)
-    │ with "VIP"   │
-    └──────────────┘
-```
-
-### Step-by-Step: Low Inventory Alert
-
-**Goal:** Get Slack notification when any product has <10 units in stock.
-
-**Setup:**
-1. **Flow → Create workflow**
-2. **Trigger:** Inventory quantity changed
-3. **Condition:** Available quantity <10
-4. **Action:** Send Slack message to #inventory channel
-5. **Message:** "🚨 Low stock alert: {product.title} has {inventory.available} units left"
-6. **Save & turn on**
-
-### Step-by-Step: High-Value Order Notification
-
-**Goal:** Email fulfillment team when order >$500 is placed.
-
-**Setup:**
-1. **Flow → Create workflow**
-2. **Trigger:** Order created
-3. **Condition:** Total price >500
-4. **Action:** Send internal email
-5. **To:** fulfillment@example.com
-6. **Subject:** "Priority Order: {order.name}"
-7. **Body:** "High-value order placed: ${order.totalPrice}. Expedite fulfillment."
-8. **Save & turn on**
-
-## Advanced Flow Patterns
-
-### 1. Multi-Condition Logic
-
-**Use case:** Tag orders as "Priority" if:
-- Order total >$300 OR
-- Customer is tagged "VIP" OR
-- Product type is "Electronics"
-
-**Setup:**
+**Tag high-value orders:**
 ```
 Trigger: Order created
-├─ Condition: Total price >300
-│  └─ Action: Tag "Priority"
-├─ Condition: Customer tagged "VIP"
-│  └─ Action: Tag "Priority"
-└─ Condition: Product type = "Electronics"
-   └─ Action: Tag "Priority"
+Condition: Order total ≥ SGD 500
+Action: Tag order "high-value"
 ```
 
-### 2. Sequential Actions
+## AI-Enhanced Flow Capabilities
 
-**Use case:** When product goes out of stock:
-1. Unpublish product
-2. Send email to inventory manager
-3. Create task in project management tool
+### Smart Triggers with AI Context
 
-**Setup:**
+Traditional triggers are event-based. AI adds predictive intelligence:
+
+- **Customer Behavior Prediction**: Trigger workflows based on predicted churn risk or purchase likelihood
+- **Sentiment Analysis**: React to customer feedback sentiment in real-time
+- **Anomaly Detection**: Automatically flag unusual order patterns or inventory movements
+- **Seasonal Intelligence**: AI recognizes regional patterns (Hari Raya, Chinese New Year, Songkran, 9.9/11.11 sales)
+
+### AI Conditions in Workflows
+
 ```
-Trigger: Inventory quantity changed
-└─ Condition: Available = 0
-   ├─ Action 1: Unpublish product
-   ├─ Action 2: Send email
-   └─ Action 3: Send HTTP request (webhook to Asana/Trello)
-```
-
-### 3. Delayed Actions
-
-**Use case:** Send review request 7 days after order fulfillment.
-
-**Setup:**
-```
-Trigger: Order fulfilled
-└─ Wait 7 days
-   └─ Action: Send email to customer
-      Subject: "How was your order?"
+IF customer_lifetime_value_prediction > SGD 5,000
+AND churn_risk = "high"
+THEN assign to premium support + offer loyalty incentive
 ```
 
-**Note:** Delays available: hours, days, weeks (max 30 days).
+### Dynamic Customer Segmentation
 
-### 4. Looping Over Line Items
+AI Flow can automatically tag customers based on:
 
-**Use case:** Tag order with all product types in the order.
-
-**Setup:**
+**Purchase Behavior:**
 ```
-Trigger: Order created
-└─ For each line item:
-   └─ Action: Tag order with {lineItem.productType}
+IF AI detects "bulk buyer" pattern
+AND average order value > SGD 1,500
+THEN tag as "B2B_Potential" + assign account manager
 ```
 
-**Example:**
-- Order contains: T-shirt (Apparel) + Hat (Accessories)
-- Result: Order tagged with "Apparel" and "Accessories"
-
-## Integrating Third-Party Apps
-
-Flow can trigger actions in **200+ apps** via connectors.
-
-### Popular App Integrations
-
-#### Klaviyo (Email Marketing)
-- **Trigger:** Customer tagged "VIP"
-- **Action:** Add to Klaviyo VIP segment
-- **Result:** Klaviyo sends targeted email campaigns
-
-#### Slack
-- **Trigger:** High-value order (>$1,000)
-- **Action:** Send Slack message to #sales
-- **Result:** Sales team gets instant notification
-
-#### Gorgias (Customer Support)
-- **Trigger:** Order tagged "urgent"
-- **Action:** Create Gorgias ticket with priority "high"
-- **Result:** Support team responds faster
-
-#### Recharge (Subscriptions)
-- **Trigger:** Subscription canceled
-- **Action:** Tag customer "churn risk"
-- **Result:** Win-back email sequence triggers
-
-#### ShipStation (Fulfillment)
-- **Trigger:** Order tagged "expedite"
-- **Action:** Update ShipStation order with "priority" flag
-- **Result:** ShipStation ships same-day
-
-### Custom Webhooks (HTTP Requests)
-
-For apps without Flow connectors, use **HTTP request action**.
-
-**Use case:** Send order data to custom CRM.
-
-**Setup:**
-1. **Trigger:** Order created
-2. **Action:** Send HTTP request
-3. **Method:** POST
-4. **URL:** `https://your-crm.com/api/orders`
-5. **Headers:** `Authorization: Bearer {api-key}`
-6. **Body:**
-```json
-{
-  "order_id": "{{order.id}}",
-  "customer_email": "{{order.customer.email}}",
-  "total": "{{order.totalPrice}}"
-}
+**Engagement Signals:**
+```
+IF customer visits 5+ times in 7 days
+AND no purchase
+AND AI predicts "high purchase intent"
+THEN tag "Hot_Lead" + trigger personalized email with incentive
 ```
 
-## APAC-Specific Automation Examples
+**Regional Preferences:**
+```
+IF customer language preference = Bahasa
+AND location = Jakarta
+THEN tag "ID_Bahasa" + enable regional marketing flows
+```
 
-### 1. Route SEA Orders to Regional Warehouse
+### AI Lifecycle Stage Automation
 
-**Goal:** Tag orders by region for correct warehouse fulfillment.
+AI automatically moves customers through stages:
+
+1. **New Customer** → Welcome series (localized by market)
+2. **Engaged Buyer** (AI detects repeat pattern) → Loyalty program invite
+3. **At-Risk** (AI predicts churn) → Win-back campaign
+4. **VIP** (AI identifies high LTV) → Premium tier access
+
+## Predictive Inventory Management
+
+### AI-Driven Stock Forecasting
+
+**Flow Example: Mega Sale Preparation (9.9, 11.11, 12.12)**
+
+```
+TRIGGER: 30 days before 11.11 sale
+CONDITION: AI predicts demand spike > 200% for product category
+ACTION:
+  - Auto-create purchase order for predicted quantity
+  - Alert warehouse team across SG/MY/ID locations
+  - Adjust safety stock levels
+  - Enable pre-order if supplier lead time > demand window
+```
+
+**SEA-Specific Considerations:**
+- Regional festival variations (Hari Raya across MY/SG/ID, Songkran in TH, Tet in VN)
+- Monsoon/rainy season demand shifts
+- Double-digit sale events (9.9, 10.10, 11.11, 12.12) unique to SEA
+- Cross-border demand patterns (SG shoppers buying MY products)
+
+### Smart Low-Stock Alerts
+
+Instead of simple threshold alerts, AI predicts:
+- Rate of sale trajectory
+- Likelihood of stockout before next restock
+- Optimal reorder timing based on supplier lead times (China, local)
+- Alternative SKU recommendations for substitution
+
+## Fraud Detection & Prevention with AI
+
+### Real-Time Fraud Scoring
+
+**High-Risk Order Flow:**
+
+```
+TRIGGER: Order placed
+CONDITION: AI fraud score > 85
+AND payment method = COD (common in ID/PH/VN)
+AND shipping address = high-risk area
+ACTION:
+  - Hold order for manual review
+  - Request customer verification via SMS/WhatsApp
+  - Flag for COD to prepaid conversion attempt
+  - Alert fraud team if value > SGD 1,000
+```
+
+### COD-Specific Fraud Prevention (Indonesia/Philippines/Vietnam)
+
+Cash on Delivery remains common in parts of SEA. AI detects:
+- Multiple COD orders from similar addresses with different names
+- Pattern of COD order cancellations / returns
+- Suspicious phone number patterns
+- Address verification mismatches
+
+**Flow Actions:**
+```
+CONDITION: AI fraud score < 40 (low risk)
+ACTION: Auto-confirm + send WhatsApp confirmation
+
+CONDITION: AI fraud score 40-70 (medium risk)
+ACTION: Send OTP verification + limit to 1 active COD order
+
+CONDITION: AI fraud score > 70 (high risk)
+ACTION: Hold for manual review + suggest prepaid with discount
+```
+
+**Post-Delivery:**
+- Successful delivery → Tag "COD_Reliable", increase limit
+- Return to Origin → Tag "COD_Risk", restrict future COD
+- 3 successful deliveries → Auto-offer loyalty points + suggest e-wallet
+
+### Return Fraud Detection
+
+```
+TRIGGER: Return request initiated
+CONDITION: AI detects "serial returner" pattern
+AND return reason = "defective" but QC found no defect in past returns
+ACTION:
+  - Escalate to senior CS team
+  - Flag account for return abuse review
+  - Require photo/video evidence before approval
+```
+
+## Dynamic Pricing Suggestions
+
+### AI-Powered Price Optimization
+
+**Mega Sale Dynamic Pricing (9.9 / 11.11 / 12.12):**
+
+```
+TRIGGER: Sale window starts
+CONDITION: AI predicts high demand for category
+AND competitor pricing analysis shows opportunity
+ACTION:
+  - Suggest price adjustment within margin guardrails
+  - Create urgency messaging ("Limited stock at this price")
+  - Adjust post-sale price to restore margin
+```
+
+**Clearance & Markdown Automation:**
+
+```
+TRIGGER: Product age > 90 days
+CONDITION: AI predicts low sell-through probability
+AND inventory > 50 units
+ACTION:
+  - Auto-apply 15% markdown
+  - Tag for "Clearance" collection
+  - If no sales in 14 days → increase to 30%
+  - Alert buying team for future planning
+```
+
+### Geographic Pricing Intelligence
+
+AI can suggest market-specific pricing:
+- **Singapore**: Premium pricing acceptable, high purchasing power
+- **Malaysia**: Mid-range, price-competitive market
+- **Indonesia/Philippines/Vietnam**: Price-sensitive, bundles and discounts drive conversion
+- **Thailand**: Mix of premium (Bangkok) and value-conscious (regional)
+
+## SEA-Specific Workflow Templates
+
+### Template 1: Multi-Market Order Routing
+
+**Route orders to correct regional warehouse:**
 
 ```
 Trigger: Order created
@@ -284,127 +228,254 @@ Trigger: Order created
 │  └─ Action: Tag "Warehouse-MY"
 ├─ Condition: Shipping country = ID
 │  └─ Action: Tag "Warehouse-ID"
-└─ Condition: Shipping country = TH
-   └─ Action: Tag "Warehouse-TH"
+├─ Condition: Shipping country = TH
+│  └─ Action: Tag "Warehouse-TH"
+└─ Condition: Shipping country = VN
+   └─ Action: Tag "Warehouse-VN"
 ```
 
-### 2. Alert for COD Orders (Cash on Delivery)
-
-**Goal:** Notify ops team for COD orders (common in Indonesia/Philippines).
-
-```
-Trigger: Order created
-└─ Condition: Payment method = "Cash on Delivery"
-   └─ Action: Send email to ops@example.com
-      Subject: "COD Order: {order.name}"
-      Body: "Customer: {customer.name}, Total: {order.totalPrice}"
-```
-
-### 3. Halal Product Compliance (Malaysia/Indonesia)
-
-**Goal:** Flag orders with non-halal products for separate processing.
+### Template 2: Halal Product Compliance (Malaysia/Indonesia)
 
 ```
 Trigger: Order created
 └─ For each line item:
-   └─ Condition: Product NOT tagged "halal"
-      └─ Action: Tag order "non-halal"
-         └─ Action: Send email to compliance team
+   └─ Condition: Product NOT tagged "halal-certified"
+      └─ Action: Tag order "non-halal-review"
+         └─ Action: Alert compliance team
 ```
 
-### 4. Chinese New Year Promotion Automation
-
-**Goal:** Apply 15% discount during CNY period.
-
-```
-Trigger: Order created
-└─ Condition: Order date between Jan 20 - Feb 5 (CNY period)
-   └─ Condition: Customer country = SG OR MY
-      └─ Action: Apply discount code "CNY15"
-```
-
-### 5. GST Reporting Tag (Singapore)
-
-**Goal:** Tag orders by GST status for accounting.
+### Template 3: GST/Tax Tagging (Singapore)
 
 ```
 Trigger: Order created
 ├─ Condition: Shipping country = SG
 │  └─ Action: Tag "GST-applicable"
 └─ Condition: Shipping country ≠ SG
-   └─ Action: Tag "GST-exempt"
+   └─ Action: Tag "export-zero-rated"
+```
+
+### Template 4: Festive Season Automation
+
+**Chinese New Year (SG/MY), Hari Raya (MY/SG/ID), Songkran (TH):**
+
+```
+30 Days Before Festival:
+1. AI forecasts demand by SKU and market
+2. Auto-notify suppliers of predicted orders
+3. Alert logistics partners (Ninja Van, J&T, Flash Express) of volume spike
+4. Auto-create festive collection, enable gift options
+5. Predict CS volume, suggest staffing increases
+
+During Festival:
+1. Real-time inventory monitoring with auto-backorder
+2. Dynamic pricing based on real-time demand
+3. Express shipping with AI-predicted delivery dates
+4. Gift wrapping / personalized messaging
+
+Post-Festival:
+1. AI predicts return volume, prep reverse logistics
+2. Identify slow movers, create markdown schedule
+3. Tag first-time festive buyers for nurture campaigns
+```
+
+### Template 5: Mega Sale Management (9.9, 11.11, 12.12)
+
+**Pre-Sale (24h before):**
+```
+- AI predicts traffic volume
+- Auto-scale infrastructure alerts
+- Enable queue management if needed
+- Pre-allocate inventory (prevent overselling)
+- Activate fraud monitoring (flash sales attract fraud)
+```
+
+**During Sale:**
+```
+- Real-time inventory sync across channels
+- Auto-pause product if stock critical
+- Fraud score monitoring (block suspicious bulk orders)
+- Dynamic cart abandonment recovery via WhatsApp
+```
+
+**Post-Sale:**
+```
+- Auto-prioritize fulfillment by proximity
+- Tag customers by behavior for retargeting
+- Generate performance report: conversion, AOV, top products
+```
+
+### Template 6: Multi-Language Customer Communication
+
+```
+TRIGGER: New customer account created
+CONDITION: Browser language detected
+ACTION:
+  ├─ English (SG/MY/PH) → English templates
+  ├─ Bahasa (MY/ID) → Bahasa templates
+  ├─ Thai (TH) → Thai templates
+  ├─ Vietnamese (VN) → Vietnamese templates
+  └─ Chinese (SG/MY) → Chinese templates
+
+Ongoing:
+- Order confirmations in preferred language
+- Shipping updates via SMS/WhatsApp in local language
+- Post-purchase follow-up culturally adapted
+- Review requests in customer's language
+```
+
+### Template 7: COD to E-Wallet Conversion (ID/PH/VN)
+
+```
+TRIGGER: Order placed with COD
+ACTION:
+  - Offer incentive to switch: "Pay now via GoPay/GCash/MoMo → get 5% off"
+  - After successful delivery: suggest e-wallet for next order
+  - After 3 successful COD deliveries: auto-offer loyalty bonus for digital payment
+```
+
+## Built-in Template Library
+
+Shopify provides **100+ pre-built templates**. Key categories:
+
+### Customer Loyalty & Segmentation
+- VIP tagging (lifetime spend thresholds)
+- Repeat customer rewards
+- Win-back campaigns (90-day inactivity)
+
+### Inventory Management
+- Low stock alerts with restock notifications
+- Auto-unpublish / republish based on inventory
+- Slow-moving inventory flagging
+
+### Order Processing
+- International order routing by region
+- B2B order priority processing
+- Same-day fulfillment tagging (orders before 2 PM)
+
+### Marketing & Engagement
+- Welcome series for new customers
+- Post-purchase review requests
+- Birthday / anniversary discounts
+
+## Advanced Flow Patterns
+
+### Multi-Condition Logic
+
+```
+Trigger: Order created
+├─ Condition: Total > SGD 300 → Tag "Priority"
+├─ Condition: Customer tagged "VIP" → Tag "Priority"
+└─ Condition: Product type = "Electronics" → Tag "Priority"
+```
+
+### Sequential Actions
+
+```
+Trigger: Inventory = 0
+├─ Action 1: Unpublish product
+├─ Action 2: Email inventory manager
+└─ Action 3: Webhook to restock system
+```
+
+### Delayed Actions
+
+```
+Trigger: Order fulfilled
+└─ Wait 7 days
+   └─ Send review request email
+```
+
+### Looping Over Line Items
+
+```
+Trigger: Order created
+└─ For each line item:
+   └─ Tag order with {lineItem.productType}
+```
+
+## Third-Party App Integrations
+
+Flow connects with **200+ apps**:
+
+| App | Use Case |
+|-----|----------|
+| **Klaviyo** | Tag VIP → Add to Klaviyo segment → Targeted campaigns |
+| **Slack** | High-value order → Alert #sales channel |
+| **Gorgias** | Urgent order → Create priority support ticket |
+| **Ninja Van / J&T** | Tag by region → Route to correct logistics partner |
+| **GrabPay / PayNow** | Payment method tracking → Segment by payment preference |
+
+### Custom Webhooks
+
+For systems without Flow connectors:
+
+```
+Trigger: Order created
+Action: Send HTTP POST
+URL: https://your-system.com/api/orders
+Headers: Authorization: Bearer {api-key}
+Body: {
+  "order_id": "{{order.id}}",
+  "customer_email": "{{order.customer.email}}",
+  "total": "{{order.totalPrice}}",
+  "country": "{{order.shippingAddress.country}}"
+}
 ```
 
 ## Best Practices
 
-### 1. Start Simple
-- Begin with 2-3 workflows (e.g., low stock alert, VIP tagging)
-- Test thoroughly before enabling
-- Add complexity gradually
+### Start Simple, Scale Smart
+1. **Phase 1**: Basic automation (order tagging, notifications)
+2. **Phase 2**: Add AI conditions (fraud scores, prediction thresholds)
+3. **Phase 3**: Complex multi-step workflows with AI decision trees
+4. **Phase 4**: Custom AI models via API integrations
 
-### 2. Test Before Enabling
-- Use **test mode** (preview runs without executing)
-- Check workflow log after enabling
-- Verify actions executed correctly
+### Testing & Validation
+- Use **test mode** before enabling
+- A/B test AI flows vs. traditional flows
+- Review workflow logs weekly
+- Audit AI predictions vs. actual outcomes monthly
 
-### 3. Avoid Loops
-**Bad example:**
+### Common Pitfalls to Avoid
+
+❌ **Over-automation**: Keep human review for high-value decisions
+❌ **Ignoring regional diversity**: SG ≠ ID ≠ VN — segment by market
+❌ **Static thresholds**: Update AI thresholds for sale seasons vs. normal
+❌ **Language assumptions**: Never assume English; check language preference
+❌ **One-size-fits-all**: Bangkok premium shoppers ≠ regional Thai buyers
+
+### Avoid Infinite Loops
+
 ```
-Trigger: Order tagged
-Condition: Tag = "high-value"
-Action: Tag order "high-value"  ← Creates infinite loop!
+❌ Bad: Trigger on "Order tagged" → Action: Tag order (same tag)
+✅ Fix: Use different tag names or add "not already tagged" condition
 ```
-
-**Solution:** Use different tag names or add "not already tagged" condition.
-
-### 4. Monitor Performance
-- Check **Flow dashboard** weekly
-- Review: runs, errors, execution time
-- Disable underperforming or broken workflows
-
-### 5. Document Workflows
-- Add description to each workflow (what it does, why)
-- Use consistent naming: "VIP Tagging - Lifetime Spend"
-- Keep inventory of active flows (spreadsheet or doc)
 
 ## Limitations
 
-### Rate Limits
-- **Max workflows:** 200 per store
-- **Max actions per workflow:** 100
-- **Delay limit:** 30 days max
-- **HTTP requests:** 1000/day per store
+| Limit | Value |
+|-------|-------|
+| Max workflows per store | 200 |
+| Max actions per workflow | 100 |
+| Max delay | 30 days |
+| HTTP requests per day | 1,000 |
+| Trigger latency | 1-2 minutes (not instant) |
 
-### What Flow CAN'T Do
-- **Modify checkout:** Can't change checkout behavior (use Functions instead)
-- **Real-time cart changes:** Can't update cart while customer shopping
-- **Complex math:** Limited calculations (use external API for complex logic)
-- **External data:** Can't fetch data from databases (only webhook responses)
+**What Flow CAN'T do:**
+- Modify checkout behavior (use Functions instead)
+- Real-time cart changes during browsing
+- Complex calculations (use external API)
+- Fetch from external databases (webhooks only)
 
-### Trigger Delays
-- Workflows trigger **within 1-2 minutes** (not instant)
-- For critical real-time tasks, consider Functions or webhooks
+## ROI Metrics for AI Flow
 
-## Troubleshooting
-
-### Workflow Not Running
-**Check:**
-- Is workflow enabled? (toggle on/off)
-- Does condition match test case? (review logic)
-- Are there errors in log? (check run history)
-
-### Wrong Action Executing
-**Check:**
-- Condition logic (AND vs OR)
-- Data fields (correct variable names)
-- Test with sample data
-
-### HTTP Request Failing
-**Check:**
-- Endpoint URL correct
-- API key valid
-- Request format (JSON, headers)
-- Check external API logs
+| Metric | Before AI Flow | After AI Flow | Target |
+|--------|---------------|---------------|--------|
+| Fraud order rate (COD markets) | 8-12% | <3% | 60-75% reduction |
+| Stockout incidents during mega sales | 15-20/event | <5/event | 75% reduction |
+| Customer response time | 4-6 hours | <1 hour | 80% improvement |
+| Manual tagging effort (hours/week) | 10-15h | <2h | 85% reduction |
+| Return fraud identification | 30-40% | >80% | 2x improvement |
 
 ## Real-World Use Case: Electronics Retailer (Singapore)
 
@@ -412,66 +483,16 @@ Action: Tag order "high-value"  ← Creates infinite loop!
 
 **Workflows implemented:**
 
-### 1. VIP Customer Rewards
-- **Trigger:** Customer lifetime spend reaches $2,000
-- **Action 1:** Tag "VIP"
-- **Action 2:** Send email with 15% discount code
-- **Action 3:** Notify account manager
-
-### 2. Low Stock Alert (Singapore Warehouse)
-- **Trigger:** Inventory <20 units (Singapore location)
-- **Condition:** Product type = "Laptops" OR "Phones"
-- **Action 1:** Email procurement team
-- **Action 2:** Slack alert to #inventory
-
-### 3. High-Value Order Fraud Check
-- **Trigger:** Order >$3,000
-- **Condition:** Fraud risk score >0.5
-- **Action 1:** Tag "manual-review"
-- **Action 2:** Slack alert to #fraud-team
-- **Action 3:** Hold fulfillment (via webhook to WMS)
-
-### 4. International Shipping Tax Tag
-- **Trigger:** Order created
-- **Condition:** Shipping country ≠ SG
-- **Action:** Tag "export" (for customs docs)
-
-### 5. Product Review Request
-- **Trigger:** Order fulfilled
-- **Action:** Wait 10 days
-- **Action:** Send email requesting review (via Klaviyo)
+1. **VIP Customer Rewards** — Lifetime spend ≥ SGD 2,000 → Tag VIP + 15% discount + notify account manager
+2. **Low Stock Alert** — Inventory <20 (SG warehouse) for Laptops/Phones → Email procurement + Slack #inventory
+3. **High-Value Fraud Check** — Order > SGD 3,000 + fraud score > 0.5 → Hold + alert + pause fulfillment
+4. **Export Tax Tagging** — Non-SG shipping → Tag "export" for customs documentation
+5. **Post-Purchase Review** — 10 days after fulfillment → Klaviyo review request email
 
 **Results:**
 - Saved 15 hours/week on manual tagging
-- Reduced stockouts by 40% (faster alerts)
-- Improved fraud detection (zero chargebacks in 6 months)
-
-## Workflow Ideas by Department
-
-### Operations
-- Auto-tag orders by fulfillment location
-- Alert on orders stuck in processing >48 hours
-- Notify when international orders need customs docs
-
-### Marketing
-- Tag customers by purchase frequency (1x, 2-3x, 4+ buyers)
-- Send birthday discount codes
-- Alert sales team when VIP places order
-
-### Customer Support
-- Auto-tag refund requests >$100 for manager review
-- Create support ticket for damaged item reports
-- Tag customers who contact support >3 times
-
-### Finance
-- Tag B2B orders with payment terms for invoice processing
-- Alert on high-value refunds (>$500)
-- Monthly report of orders by payment method
-
-### Inventory
-- Unpublish out-of-stock products
-- Re-publish when restocked
-- Alert on slow-moving inventory (no sales in 60 days)
+- Reduced stockouts by 40%
+- Zero chargebacks in 6 months
 
 ## Resources
 
@@ -481,5 +502,7 @@ Action: Tag order "high-value"  ← Creates infinite loop!
 - [Flow Actions Reference](https://help.shopify.com/en/manual/shopify-flow/actions)
 
 ---
+
+**Key Takeaway for SEA Merchants**: AI-enhanced Flow is particularly powerful for managing Southeast Asia's complexity—diverse languages, payment preferences (COD vs. e-wallets vs. cards), regional festivals, multi-market operations, and halal compliance. Automate intelligently, but maintain human oversight for cultural nuance.
 
 **Next:** [App Development →](08-app-development.md)
