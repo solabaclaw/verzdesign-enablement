@@ -1,8 +1,8 @@
-# Checkout Extensibility
+# Checkout Extensibility: AI-Powered Checkout for Southeast Asia
 
 ## Overview
 
-Checkout Extensibility is Shopify's modern, component-based checkout system that replaces the legacy checkout.liquid template. It provides better performance, security, and customization capabilities while maintaining checkout conversion rates.
+Checkout Extensibility is Shopify's modern, component-based checkout system that replaces the legacy checkout.liquid template. Combined with AI-powered personalization, smart recommendations, and regional payment optimization, it delivers the conversion rates SEA merchants need to compete with marketplace giants.
 
 **Deadline:** All Plus stores must migrate from checkout.liquid by **August 13, 2025**.
 
@@ -12,12 +12,14 @@ Checkout Extensibility is Shopify's modern, component-based checkout system that
 - **Performance:** Custom code slows page load
 - **Security:** Direct DOM access creates vulnerabilities
 - **Maintenance:** Breaking changes with Shopify updates
-- **Mobile:** Harder to optimize for mobile
+- **Mobile:** Harder to optimize (critical — 70%+ of SEA traffic is mobile)
 - **Apps:** Conflicts between multiple apps
+- **No AI integration:** Cannot leverage Shopify's recommendation engine
 
 ### Benefits of Extensibility
 - **3x faster** checkout load times
 - **Component-based:** Pre-optimized UI components
+- **AI-ready:** Integrate smart recommendations and personalization at checkout
 - **App-friendly:** Apps work together without conflicts
 - **Future-proof:** Shopify maintains compatibility
 - **Conversion:** Average 15% improvement in mobile conversion
@@ -30,19 +32,19 @@ Checkout Extensibility is Shopify's modern, component-based checkout system that
 
 Build custom app blocks that inject into checkout:
 - Custom fields (gift messages, delivery instructions)
-- Upsells & cross-sells
+- **AI-powered upsells & cross-sells** (personalized per customer)
 - Subscription options
 - Trust badges & social proof
 - Marketing opt-ins
 - Custom validations
 
 **Extension targets:**
-- `purchase.checkout.block.render` - Static content
-- `purchase.checkout.actions.render-before` - Before payment buttons
-- `purchase.checkout.contact.render-after` - After contact info
-- `purchase.checkout.delivery-address.render-after` - After address
-- `purchase.checkout.shipping-option-list.render-after` - After shipping
-- `purchase.checkout.reductions.render-after` - After discounts
+- `purchase.checkout.block.render` — Static content
+- `purchase.checkout.actions.render-before` — Before payment buttons
+- `purchase.checkout.contact.render-after` — After contact info
+- `purchase.checkout.delivery-address.render-after` — After address
+- `purchase.checkout.shipping-option-list.render-after` — After shipping
+- `purchase.checkout.reductions.render-after` — After discounts
 
 ### 2. Checkout Branding API
 **Design checkout to match brand**
@@ -52,21 +54,76 @@ Customize via `checkoutBranding` API or admin UI:
 - Typography (fonts, sizes, weights)
 - Border radius & styling
 - Button styles
-- Form inputs
-- Spacing & layout
-
-**Example customizations:**
-- Match brand color palette
-- Use brand fonts (Google Fonts or custom)
-- Rounded vs sharp corners
-- Button size & prominence
+- Form inputs & spacing
 
 ### 3. Payment & Delivery Customization (via Functions)
-**Control what options appear**
+**Control what options appear — powered by AI logic**
 
-- **Payment Customization:** Hide, reorder, rename payment methods
-- **Delivery Customization:** Dynamic shipping rates, hide methods
+- **Payment Customization:** Hide, reorder, rename payment methods based on customer segment, cart value, or geography
+- **Delivery Customization:** Dynamic shipping rates, hide methods by region
 - Covered in detail in [Shopify Functions](03-shopify-functions.md)
+
+## AI-Powered Checkout Personalization
+
+### Smart Product Recommendations at Checkout
+
+Shopify's AI recommendation engine can power checkout upsells and cross-sells that adapt per customer:
+
+**How it works:**
+- AI analyzes cart contents, customer purchase history, and browsing behavior
+- Collaborative filtering leverages the entire Shopify network (millions of stores)
+- Recommendations are contextually relevant — not random products
+
+**Example: Fashion Brand (Singapore)**
+```
+Cart: Women's Batik Dress (SGD 89)
+
+AI recommends at checkout:
+1. Matching clutch bag (SGD 39) — 62% co-purchase rate
+2. Pearl earrings (SGD 29) — "Complete the Look" 
+3. Gift wrapping (SGD 5) — high attach rate during festive periods
+
+Result: 28% of customers add at least one item
+Average AOV lift: SGD 24 per order
+```
+
+**Example: Electronics (Malaysia)**
+```
+Cart: Wireless earbuds (MYR 299)
+
+AI recommends:
+1. Protective case (MYR 49) — 55% co-purchase rate
+2. Extended warranty (MYR 39) — 32% attach rate
+3. USB-C cable (MYR 19) — complementary accessory
+
+Result: Accessories attach rate increases from 15% to 38%
+```
+
+### Personalized Checkout Experience by Segment
+
+AI enables different checkout experiences based on customer data:
+
+| **Customer Segment** | **Checkout Personalization** |
+|---------------------|----------------------------|
+| First-time visitor | Trust badges, payment security messaging, popular items upsell |
+| Returning customer | "Buy again" suggestions, loyalty points display |
+| High-LTV customer | Premium upsells, exclusive bundle offers |
+| B2B buyer | Payment terms display, bulk discount summary |
+| Cart abandoner (returning) | Urgency messaging, limited-time discount |
+
+### AI-Driven Urgency & Social Proof
+
+```javascript
+function SmartSocialProof() {
+  // AI determines which social proof message converts best
+  // for this customer segment and product category
+  return (
+    <Banner>
+      🔥 23 people bought this today in Singapore
+    </Banner>
+  );
+}
+```
 
 ## Building Checkout UI Extensions
 
@@ -108,13 +165,12 @@ function Extension() {
   const { cost } = useApi();
   const translate = useTranslate();
   
-  // Show banner for orders over $100
   const totalAmount = parseFloat(cost.totalAmount.amount);
   
   if (totalAmount >= 100) {
     return (
       <Banner title="Free shipping activated!">
-        Your order qualifies for free shipping 🎉
+        Your order qualifies for free shipping across Singapore 🎉
       </Banner>
     );
   }
@@ -123,12 +179,62 @@ function Extension() {
 }
 ```
 
-### Common Use Cases
+### AI-Powered Upsell Extension
 
-#### 1. Gift Message Field
 ```javascript
-import { TextField } from '@shopify/ui-extensions-react/checkout';
+import {
+  Banner,
+  Button,
+  Image,
+  Text,
+  View,
+  useApi,
+  reactExtension,
+} from '@shopify/ui-extensions-react/checkout';
 
+export default reactExtension(
+  'purchase.checkout.block.render',
+  () => <SmartUpsell />
+);
+
+function SmartUpsell() {
+  const { lines, applyCartLinesChange, cost } = useApi();
+  const [loading, setLoading] = useState(false);
+
+  // Fetch AI-recommended product based on cart contents
+  // Uses Shopify's recommendation engine API
+  const recommendation = useRecommendation(lines);
+  
+  if (!recommendation) return null;
+  
+  const addUpsell = async () => {
+    setLoading(true);
+    await applyCartLinesChange({
+      type: 'addCartLine',
+      merchandiseId: recommendation.variantId,
+      quantity: 1,
+    });
+    setLoading(false);
+  };
+  
+  return (
+    <Banner title="Frequently bought together">
+      <View>
+        <Text>{recommendation.title} — {recommendation.price}</Text>
+        <Text size="small">{recommendation.reason}</Text>
+        <Button onPress={addUpsell} loading={loading}>
+          Add to order
+        </Button>
+      </View>
+    </Banner>
+  );
+}
+```
+
+### Common Use Cases for SEA
+
+#### 1. Gift Message (Popular During Festive Seasons)
+```javascript
 function GiftMessage() {
   const [message, setMessage] = useState('');
   
@@ -138,44 +244,13 @@ function GiftMessage() {
       value={message}
       onChange={setMessage}
       multiline={3}
+      placeholder="Happy Chinese New Year! 🧧"
     />
   );
 }
 ```
 
-#### 2. Upsell Product
-```javascript
-function CheckoutUpsell() {
-  const { lines, applyCartLinesChange } = useApi();
-  const [loading, setLoading] = useState(false);
-  
-  const hasUpsellProduct = lines.some(
-    line => line.merchandise.id === 'gid://shopify/ProductVariant/123'
-  );
-  
-  if (hasUpsellProduct) return null;
-  
-  const addUpsell = async () => {
-    setLoading(true);
-    await applyCartLinesChange({
-      type: 'addCartLine',
-      merchandiseId: 'gid://shopify/ProductVariant/123',
-      quantity: 1,
-    });
-    setLoading(false);
-  };
-  
-  return (
-    <Banner title="Add protection plan?">
-      <Button onPress={addUpsell} loading={loading}>
-        Add for $9.99
-      </Button>
-    </Banner>
-  );
-}
-```
-
-#### 3. Delivery Instructions
+#### 2. Delivery Instructions (Critical for SEA Addresses)
 ```javascript
 function DeliveryInstructions() {
   const { applyAttributeChange, attributes } = useApi();
@@ -195,7 +270,44 @@ function DeliveryInstructions() {
           value,
         });
       }}
+      placeholder="e.g., Leave with lobby security / Condo unit #12-05"
     />
+  );
+}
+```
+
+#### 3. Regional Payment Trust Badges
+```javascript
+function PaymentTrustBadge() {
+  const { deliveryGroups } = useApi();
+  const country = deliveryGroups[0]?.deliveryAddress?.countryCode;
+  
+  const badges = {
+    SG: "We accept PayNow, GrabPay & all major cards 🇸🇬",
+    MY: "We accept FPX, GrabPay, Boost & all major cards 🇲🇾",
+    ID: "We accept DANA, OVO, GoPay & bank transfer 🇮🇩",
+    TH: "We accept PromptPay, TrueMoney & all major cards 🇹🇭",
+    PH: "We accept GCash, Maya & all major cards 🇵🇭",
+  };
+  
+  const message = badges[country] || "Secure payment with all major methods";
+  
+  return <Banner>{message}</Banner>;
+}
+```
+
+#### 4. GST Display (Singapore)
+```javascript
+function GSTBreakdown() {
+  const { cost } = useApi();
+  const subtotal = parseFloat(cost.subtotalAmount.amount);
+  const gst = subtotal * 0.09; // 9% GST
+  
+  return (
+    <View>
+      <Text>Subtotal: S${subtotal.toFixed(2)}</Text>
+      <Text>GST (9%): S${gst.toFixed(2)}</Text>
+    </View>
   );
 }
 ```
@@ -216,44 +328,10 @@ mutation checkoutBrandingUpsert($checkoutBrandingInput: CheckoutBrandingInput!) 
     checkoutBranding {
       designSystem {
         colors {
-          global {
-            accent
-            brand
-            critical
-          }
+          global { accent, brand, critical }
         }
         typography {
-          primary {
-            base {
-              weight
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**Variables:**
-```json
-{
-  "checkoutBrandingInput": {
-    "designSystem": {
-      "colors": {
-        "global": {
-          "accent": "#FF6B35",
-          "brand": "#004E89"
-        }
-      },
-      "typography": {
-        "primary": {
-          "customFontGroup": {
-            "base": {
-              "genericFileId": "gid://shopify/GenericFile/123",
-              "weight": 400
-            }
-          }
+          primary { base { weight } }
         }
       }
     }
@@ -273,30 +351,31 @@ mutation checkoutBrandingUpsert($checkoutBrandingInput: CheckoutBrandingInput!) 
    - Custom logic → Shopify Functions
    - Branding → Branding API
    - Scripts → Web Pixels API
+   - **New:** Add AI recommendation extensions
 
 ### Migration Steps
 
 #### Step 1: Enable Checkout Extensibility
 - Admin → Settings → Checkout → "Upgrade to Checkout Extensibility"
-- Creates new extensible checkout (checkout.liquid still works during transition)
 
-#### Step 2: Rebuild Customizations
+#### Step 2: Rebuild Customizations + Add AI
 - Build UI Extensions for custom fields
+- **Add AI-powered upsell/cross-sell extensions**
 - Use Functions for payment/shipping logic
 - Apply branding via API or admin
 - Add web pixels for tracking
 
 #### Step 3: Test Thoroughly
 - Test on staging store first
-- Check all edge cases (multiple items, discounts, etc.)
-- Mobile & desktop
-- Different payment methods
-- International orders
+- Mobile & desktop (prioritize mobile — 70%+ SEA traffic)
+- Different payment methods (GrabPay, PayNow, FPX, etc.)
+- International orders across SEA markets
+- AI recommendation relevance for different cart compositions
 
 #### Step 4: Cut Over
 - Publish extensions
 - Disable checkout.liquid customizations
-- Monitor conversion rates
+- Monitor conversion rates closely
 - Have rollback plan ready
 
 ### Common Migration Patterns
@@ -304,7 +383,7 @@ mutation checkoutBrandingUpsert($checkoutBrandingInput: CheckoutBrandingInput!) 
 | checkout.liquid | Extensibility Solution |
 |----------------|------------------------|
 | Custom input field | Checkout UI Extension (TextField) |
-| Upsell widget | Checkout UI Extension (Product offer) |
+| Upsell widget | **AI-powered** Checkout UI Extension |
 | Hide payment method | Payment Customization Function |
 | Custom shipping rate | Delivery Customization Function |
 | Brand styling | Checkout Branding API |
@@ -312,37 +391,76 @@ mutation checkoutBrandingUpsert($checkoutBrandingInput: CheckoutBrandingInput!) 
 | Address validation | Validation Function |
 | Gift wrap checkbox | UI Extension + cart attributes |
 
-## Best Practices for Plus Merchants
+## AI Recommendations: Cross-Sell & Upsell Strategy
 
-### 1. Performance First
+### Revenue Impact Model for SEA Merchants
+
+| **Tactic** | **Typical AOV Lift** | **Implementation** |
+|------------|---------------------|-------------------|
+| Product page related items | 5-10% | Native AI recommendations |
+| Cart page cross-sell | 10-20% | AI + UI Extension |
+| **Checkout AI upsell** | **8-15%** | **Checkout UI Extension** |
+| Post-purchase upsell | 5-12% | Flow + thank you page |
+| Bundle recommendations | 15-25% | AI bundling logic |
+| Email cross-sell | 3-8% | Automated + AI picks |
+
+### SEA-Specific Cross-Sell Patterns
+
+**Fashion & Lifestyle:**
+- Batik dress → matching clutch + sandals
+- Cheongsam → jade jewelry + silk shawl
+- Athleisure set → water bottle + gym bag
+
+**Beauty & Personal Care:**
+- Sunscreen (SPF50 for tropical climate) → moisturizer + cleanser
+- Hair treatment → conditioner + scalp serum (humidity concerns)
+
+**Electronics:**
+- Smartphone → case + screen protector + power bank (essential for SEA commuters)
+- Laptop → bag + wireless mouse + USB-C hub
+
+**F&B / DTC:**
+- Coffee beans → drip bags + mug + grinder
+- Health supplements → shaker + resistance bands
+
+### Festive Season Optimization
+
+During mega-sale and festive periods (CNY, Hari Raya, 11.11, 12.12):
+- **Gift bundling:** AI identifies products frequently purchased together as gifts
+- **Price-anchored upsells:** "Add gift wrapping for SGD 5" / "Upgrade to premium packaging for SGD 12"
+- **Occasion-based recommendations:** Different logic for "buying for self" vs "buying as gift"
+
+## Best Practices for SEA Plus Merchants
+
+### 1. Mobile-First (Non-Negotiable)
+- 70%+ of SEA e-commerce traffic is mobile
+- Test on small screens first
+- Touch-friendly buttons (min 44x44px)
+- Concise copy — no walls of text at checkout
+
+### 2. Performance First
 - Keep extensions lightweight (<50kb)
 - Lazy load non-critical content
 - Minimize API calls
-- Use static content when possible
+- AI recommendations should load asynchronously
 
-### 2. Mobile Optimization
-- Test on small screens first
-- Use responsive components
-- Touch-friendly buttons (min 44x44px)
-- Concise copy
+### 3. Localization
+- Use `useTranslate()` hook for all text
+- Support languages per market (EN, ZH, MS, ID, TH, VI, TL)
+- Respect currency formatting (SGD, MYR, IDR, THB, PHP, VND)
+- Show region-appropriate payment badges
 
-### 3. A/B Testing
-- Use Shopify Scripts or Functions for logic-based tests
-- Test one change at a time
+### 4. A/B Testing AI Recommendations
+- Test AI upsell placements (before vs after shipping options)
+- Test recommendation types (complementary vs similar vs bundle)
 - Monitor: conversion rate, AOV, cart abandonment
 - 2-week minimum test duration
 
-### 4. Error Handling
+### 5. Error Handling
+- Don't block checkout if AI recommendation fails to load
 - Validate user input
-- Show clear error messages
-- Don't block checkout on extension failure
+- Show clear error messages in the customer's language
 - Log errors for debugging
-
-### 5. Internationalization
-- Use `useTranslate()` hook for all text
-- Support multiple languages
-- Respect currency formatting
-- Test in all active markets
 
 ## Checkout Extensibility Limits
 
@@ -359,64 +477,29 @@ mutation checkoutBrandingUpsert($checkoutBrandingInput: CheckoutBrandingInput!) 
 - Modify checkout URL structure
 - Inject arbitrary HTML/CSS
 
-## Testing & Debugging
+## Measuring AI Checkout Performance
 
-### Local Development
-```bash
-npm run dev
-# Opens checkout preview with extension loaded
-# Hot reload enabled
-```
+### Key Metrics
 
-### Debugging
-- Use `console.log()` (appears in browser console)
-- Shopify DevTools extension
-- Check network tab for API errors
-- Review extension logs in Partner Dashboard
+| **Metric** | **Benchmark** | **Target** |
+|------------|--------------|-----------|
+| AI upsell click-through rate | 5-15% | >10% |
+| AI upsell conversion rate | 8-20% | >12% |
+| Revenue from AI recommendations | 10-30% of checkout revenue | >15% |
+| AOV lift from AI cross-sell | 10-25% | >15% |
+| Mobile checkout conversion | 2-4% | >3% |
 
-### Preview in Different States
-- Empty cart vs full cart
-- Different shipping addresses (domestic/international)
-- Multiple products
-- Discount codes applied
-- Different customer segments (B2B, VIP, etc.)
-
-## Real-World Examples (APAC Context)
-
-### Singapore GST Display
-Show GST breakdown clearly:
-```javascript
-function GSTBreakdown() {
-  const { cost } = useApi();
-  const subtotal = parseFloat(cost.subtotalAmount.amount);
-  const gst = subtotal * 0.09; // 9% GST
-  
-  return (
-    <View>
-      <Text>Subtotal: ${subtotal.toFixed(2)}</Text>
-      <Text>GST (9%): ${gst.toFixed(2)}</Text>
-    </View>
-  );
-}
-```
-
-### Local Payment Method Badge
-Show trust badges for regional payments:
-```javascript
-function PaymentTrustBadge() {
-  return (
-    <Banner>
-      We accept PayNow, GrabPay, and all major cards 🇸🇬
-    </Banner>
-  );
-}
-```
+### Sidekick Analytics Queries
+- "What percentage of checkout revenue came from AI recommendations this month?"
+- "Compare AOV for customers who accepted upsell vs declined"
+- "Show checkout conversion rate by market (SG vs MY vs ID)"
 
 ## Resources
 
 - [Checkout Extensibility Guide](https://shopify.dev/docs/apps/checkout)
 - [UI Extensions API Reference](https://shopify.dev/docs/api/checkout-ui-extensions)
 - [Branding API Docs](https://shopify.dev/docs/api/admin-graphql/latest/mutations/checkoutBrandingUpsert)
+- [Product Recommendations API](https://shopify.dev/docs/api/ajax/reference/product-recommendations)
 - [Migration Guide](https://shopify.dev/docs/apps/checkout/migrate)
 - [Component Library](https://shopify.dev/docs/api/checkout-ui-extensions/components)
 
